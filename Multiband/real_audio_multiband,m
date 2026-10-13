@@ -1,0 +1,30 @@
+%% Real Audio Multi-band Processing (FIXED)
+% Apply complete equalizer to real audio files
+clear; clc; close all;
+
+% Load filter bank
+load('multiband_filters.mat');
+fprintf('=== Real Audio Multi-band Processing ===\n');
+
+%% Load Real Audio File
+try
+    % Try to load audio from Day 1
+    [audio_original, fs_file] = audioread('../../AudioFiles/test_music.wav');
+    fprintf('Audio loaded: test_music.wav\n');
+catch
+    try
+        % Try built-in MATLAB audio
+        load handel
+        audio_original = y;
+        fs_file = Fs;
+        clear y Fs;
+        fprintf('Audio loaded: Handel (built-in)\n');
+    catch
+        % Generate synthetic audio if no files available
+        duration = 10;
+        t = (0:1/fs:duration-1/fs)';
+        audio_original = sin(2*pi*220*t) + 0.5*sin(2*pi*880*t) + 0.3*sin(2*pi*3520*t);
+        fs_file = fs;
+        fprintf('Audio generated: synthetic multi-tone\n');
+    end
+end
