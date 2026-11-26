@@ -1,0 +1,6 @@
+Put your own .wav files in this folder.
+
+- step3_real_audio.m reads the file named in its "input_file" setting.
+  If that file does not exist, it creates a test song called test_music.wav here.
+- Results of step3_real_audio.m are written to the "output" subfolder.
+- The GUI (equalizer_gui) can load a file from anywhere with "Load Audio".
